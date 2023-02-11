@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:unscript_app/home/home.dart';
+import 'package:unscript_app/news/news.dart';
 import 'package:unscript_app/utils/unscript_theme.dart';
 
 class App extends StatefulWidget {
@@ -57,7 +58,7 @@ class _AppState extends State<App> {
               title: "Trade",
               textStyle: UnScriptTheme.appText(
                   size: screenWidth / 26, weight: FontWeight.bold)),
-           PersistentBottomNavBarItem(
+          PersistentBottomNavBarItem(
               icon: const Icon(
                 CupertinoIcons.person,
               ),
@@ -73,7 +74,7 @@ class _AppState extends State<App> {
                 top: BorderSide(
                     width: 0.2,
                     color: UnScriptTheme.bgTextColor2.withOpacity(0.6)))),
-        screens: [Home(), const Scaffold(), const Scaffold(), const Scaffold()],
+        screens: [Home(), NewsPage(), const Scaffold(), const Scaffold()],
         screenTransitionAnimation: const ScreenTransitionAnimation(
           animateTabTransition: true,
           curve: Curves.easeIn,
