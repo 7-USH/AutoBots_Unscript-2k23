@@ -36,5 +36,42 @@ class Scraper:
                     li.append(curr_bond)
         return li
 
+    def get_news(self):
+        html = requests.get(
+            'https://economictimes.indiatimes.com/topic/bond-market')
+        soup = BeautifulSoup(html.text, "html5lib")
+
+        span_list = soup.find(id='categorywiseTop').find_all("span")
+        new_items = [span_list[i].find_all("img")
+                     for i in range(len(span_list))]
+        new_items[0][0]['data-original']
+        soup.find(id='categorywiseTop').find_all(
+            "div", {'class': 'syn'})[0].string
+
+        news_list = [
+            {
+                'title': new_items[i][0]['alt'],
+                'image':new_items[i][0]['data-original'],
+                'time':soup.find(id='categorywiseTop').find_all("time")[i].string,
+                'desc':soup.find(id='categorywiseTop').find_all("div", {'class': 'syn'})[i].string
+            } for i in range(len(new_items))
+        ]
+
+        all_list = soup.find(id='categorywise').find_all("ul")
+        new_all_list = all_list[1:][0].find_all('li')[0].find_all("div")
+
+        for i in range(len(new_all_list)):
+            try:
+                news_list.append({
+                    'title': new_all_list[i].find_all("img")[0]['alt'],
+                    'image': new_all_list[i].find_all("img")[0]['data-original'],
+                    'desc': new_all_list[i].find_all("div", {'class': "syn"})[0].string,
+                    'time': new_all_list[i].find_all("div", {'class': "contentD"})[0].find_all("time")[0].string
+                }
+                )
+            except:
+                pass
+        return news_list
+
 
 scraper = Scraper()

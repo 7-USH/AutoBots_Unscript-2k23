@@ -9,10 +9,19 @@ from integrations import scraper
 router = APIRouter()
 
 
-@router.post("/live-bonds")
+@router.get("/live-bonds")
 def get_live_bonds(
     *,
     db: Session = Depends(deps.get_db),
 ) -> List:
     live_bonds = scraper.get_current_bonds()
     return live_bonds
+
+
+@router.get("/news")
+def get_live_bonds(
+    *,
+    db: Session = Depends(deps.get_db),
+) -> List:
+    news = scraper.get_news()
+    return news
