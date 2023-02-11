@@ -1,4 +1,6 @@
 from typing import Any, Dict, List
+import openai
+import re
 
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
@@ -25,3 +27,19 @@ def get_live_bonds(
 ) -> List:
     news = scraper.get_news()
     return news
+
+@router.post("/ask-question")
+def get_reply(*,
+    db: Session = Depends(deps.get_db),
+    question: Dict,
+
+) -> Dict:
+    openai.api_key = "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"
+    question = question.get('question')
+    response = openai.Completion.create(
+        model="text-davinci-003",
+        prompt=question,
+        temperature=0,
+        max_tokens= 1000,
+    )
+    return {"answer": response.choices[0].text.strip("\n")}
