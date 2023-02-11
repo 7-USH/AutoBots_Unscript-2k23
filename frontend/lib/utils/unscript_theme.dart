@@ -14,16 +14,12 @@ class UnScriptTheme {
   static const Color bgTextColor2 = Color(0xffAEAEAE);
 
   // ignore: constant_identifier_names
-  static const String UNSCRIPT_DB_LINK =
-      "https://frce-fastapi-soumitrakand7.cloud.okteto.net/";
+  static const String UNSCRIPT_DB_LINK = 
+  "https://fcreh-autobots.onrender.com/";
+  //"https://frce-fastapi-soumitrakand7.cloud.okteto.net/";
 
   // ignore: constant_identifier_names
   static const String API_VERSION = "api/v1/";
-
-
-  // bond api key
-  static const String BOND_API_KEY =
-      "cfjist1r01que34o13n0cfjist1r01que34o13ng";
 
   static TextStyle appText({
     required double size,

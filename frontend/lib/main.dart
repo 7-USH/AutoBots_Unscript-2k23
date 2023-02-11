@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, unused_import
+// ignore_for_file: prefer_const_constructors, unused_import, unused_local_variable, avoid_print
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -18,19 +18,15 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  await FirebaseMessaging.instance.getToken();
-  //push notifications
-  FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    print('Got a message whilst in the foreground!');
-    print('Message data: ${message.data}');
-
-    if (message.notification != null) {
-      print('Message also contained a notification: ${message.notification}');
-    }
-  });
+  // await Firebase.initializeApp();
+  // await FirebaseMessaging.instance.getToken();
+  // FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
+  // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+  //   if (message.notification != null) {
+  //     print('Message also contained a notification: ${message.notification}');
+  //   }
+  // });
   const orientations = [
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown
@@ -51,12 +47,10 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    FirebaseMessaging.instance.getToken().then((newToken) {
-      print("FCM Token: ");
-      print(newToken);
-      // // save device token to server
-      // tokenService.updateTokenOnServer(newToken);
-    });
+    // FirebaseMessaging.instance.getToken().then((newToken) {
+    //   print("FCM Token: ");
+    //   print(newToken);
+    // });
     switchHome();
     super.initState();
   }

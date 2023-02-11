@@ -17,7 +17,7 @@ class AssetCard extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
     return Container(
       width: screenWidth,
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           color: UnScriptTheme.backgroundColor,

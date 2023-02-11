@@ -2,15 +2,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:unscript_app/common/api.dart';
-import 'package:unscript_app/home/models/bond_model.dart';
+import 'package:unscript_app/news/models/news_model.dart';
 import 'package:unscript_app/utils/unscript_theme.dart';
 
-class HomeService {
-  final ApiService _apiService = ApiService();
+class NewsService {
+  final ApiService _service = ApiService();
 
-  Future<List<BondModel>> getLiveBonds({required BuildContext context}) async {
-    String endpoint = "live-data/live-bonds";
-    var response = await _apiService.getAllData(endpoint);
+  Future<List<NewsModel>> getLiveNews({required BuildContext context}) async {
+    String endpoint = "live-data/news";
+    var response = await _service.getAllData(endpoint);
     if (response.isLeft) {
       return UnScriptTheme.moveToError(
           context: context,
@@ -18,10 +18,8 @@ class HomeService {
           statusCode: response.left.statusCode);
     } else {
       return response.right
-          .map<BondModel>((e) => BondModel.fromJson(e))
+          .map<NewsModel>((e) => NewsModel.fromJson(e))
           .toList();
     }
   }
-
-  
 }
