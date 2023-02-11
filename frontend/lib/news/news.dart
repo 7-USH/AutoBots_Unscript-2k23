@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:unscript_app/news/service/news_service.dart';
 import 'package:unscript_app/news/ui_view/news_card.dart';
 import 'package:unscript_app/utils/unscript_theme.dart';
@@ -24,14 +25,16 @@ class _NewsPageState extends State<NewsPage> {
       backgroundColor: UnScriptTheme.backgroundColor,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(top: 20,left: 20,right: 20),
+          padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 "Discover",
                 style: UnScriptTheme.screenText(
-                    size: screenWidth / 6.5, weight: FontWeight.bold,),
+                  size: screenWidth / 6.5,
+                  weight: FontWeight.bold,
+                ),
               ),
               Text(
                 "Get trending news about Trading!",
@@ -78,7 +81,30 @@ class _NewsPageState extends State<NewsPage> {
                             itemCount: snapshot.data!.length),
                       );
                     } else {
-                      return Container();
+                      return Expanded(
+                        child: ListView.separated(
+                            physics: const BouncingScrollPhysics(),
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) {
+                              return Shimmer.fromColors(
+                                baseColor: Colors.grey.shade400,
+                                highlightColor: UnScriptTheme.perfectWhite,
+                                direction: ShimmerDirection.rtl,
+                                child: Container(
+                                  height: screenWidth / 2,
+                                  decoration: BoxDecoration(
+                                      color: UnScriptTheme.nearlyWhite,
+                                      borderRadius: BorderRadius.circular(20)),
+                                ),
+                              );
+                            },
+                            separatorBuilder: (context, index) {
+                              return const SizedBox(
+                                height: 20,
+                              );
+                            },
+                            itemCount: snapshot.data!.length),
+                      );
                     }
                   })
             ],
