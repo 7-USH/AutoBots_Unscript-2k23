@@ -115,6 +115,14 @@ class CRUDUser(CRUDBase):
         db.refresh(user_obj)
         return user_obj
 
+    def deposit_amount(self, db: Session, deposit_amount: float, user_email: str):
+        user_obj = self.get_by_email(db=db, email=user_email)
+        setattr(user_obj, 'account_balance', deposit_amount)
+        db.add(user_obj)
+        db.commit()
+        db.refresh(user_obj)
+        return user_obj
+
     def get_aadhaar_details(self, image: str, side: str):
         im = Image.open(BytesIO(base64.b64decode(image)))
         file_name = str(uuid.uuid4()) + '-image.png'

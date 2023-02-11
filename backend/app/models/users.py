@@ -19,3 +19,4 @@ class Users(Base):
     aadhaar_no = Column(String(12), nullable=False, index=True, unique=True)
     dob = Column(DateTime)
     gender = Column(String(24))
+    account_balance = Column(Float, default=0)

@@ -76,19 +76,13 @@ def get_users(
     return user_details
 
 
-# @router.post("/upload-aadhaar-image")
-# def upload_profile_image(
-#     db: Session = Depends(deps.get_db),
-#     *,
-# ):
-
-
-# new_dict = {
-#     "dob": "06/12/2002",
-#     "gender": "male",
-#     "name": "Amogh V Prabhu",
-#     "aadhaa_no": "226951622491",
-#     "address": "B-301 Navdurga CHS Sector-19 Nerul East Pin Code-400706 Navi Mumbai Thane Maharashtra 400615"
-
-
-# }
+@router.put("/deposit-amount")
+def get_users(
+    txn_details: Dict,
+    db: Session = Depends(deps.get_db),
+    current_user: models.Users = Depends(deps.get_current_user),
+):
+    deposit_amount = txn_details.get('deposit_amount')
+    user_obj = crud.user.deposit_amount(
+        db=db, deposit_amount=deposit_amount, user_email=current_user)
+    return user_obj
