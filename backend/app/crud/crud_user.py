@@ -8,6 +8,15 @@ from integrations import mailer
 from datetime import datetime
 from app import crud
 import jinja2
+import uuid
+from ..core.config import settings
+
+import os
+
+from PIL import Image
+from io import BytesIO
+import base64
+import requests
 
 import random
 from backports.zoneinfo import ZoneInfo
@@ -90,6 +99,24 @@ class CRUDUser(CRUDBase):
         db.commit()
         db.refresh(user_obj)
         return user_obj
+
+    def get_aadhaar_details(self, image: str, side: str):
+        im = Image.open(BytesIO(base64.b64decode(image)))
+        file_name = str(uuid.uuid4()) + '-image.png'
+        im.save(file_name)
+
+        url = f"https://nationalapi.docsumo.com/api/v1/national/extract/?side={side}&save_data=false&return_redacted=false&fraud_check=true"
+
+        with open(file_name, 'rb') as f:
+            x = requests.post(url, headers={
+                "X-API-KEY": settings.X_API_KEY}, files={'File': f})
+            # print(x.status_code)
+            # print(x.text)
+        os.remove(file_name)
+
+        if x.status_code == 200:
+            return x.text
+        return False
 
 
 user = CRUDUser()
