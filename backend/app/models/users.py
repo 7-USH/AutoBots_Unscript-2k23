@@ -15,7 +15,7 @@ class Users(Base):
     activation_code = Column(Float)
     registration_date = Column(DateTime, default=str(
         datetime.now(tz=ZoneInfo('Asia/Kolkata'))))
-    # address = Column(Text)
-    # aadhaar_no = Column(String(12), nullable=False, index=True, unique=True)
-    # dob = Column(DateTime)
-    # gender = Column(String(24))
+    address = Column(Text)
+    aadhaar_no = Column(String(12), nullable=False, index=True, unique=True)
+    dob = Column(DateTime)
+    gender = Column(String(24))

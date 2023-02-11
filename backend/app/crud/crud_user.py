@@ -26,12 +26,27 @@ class CRUDUser(CRUDBase):
     def get_by_email(self, db: Session, *, email: str) -> Optional[Users]:
         return db.query(Users).filter(Users.email == email).first()
 
-    def create(self, db: Session, *, obj_in: Dict) -> Any:
+    def create(
+        self,
+        db: Session,
+        *,
+        email: str,
+        password: str,
+        full_name: str,
+        address: str,
+        dob: str,
+        gender: str,
+        aadhaar_no: str
+    ) -> Any:
         db_obj = Users(
-            email=obj_in.get("email"),
-            hashed_password=get_password_hash(obj_in.get('password')),
-            full_name=obj_in.get('full_name'),
+            email=email,
+            full_name=full_name,
+            hashed_password=get_password_hash(password),
             is_active=False,
+            address=address,
+            dob=dob,
+            gender=gender,
+            aadhaar_no=aadhaar_no
         )
         db.add(db_obj)
         db.commit()
