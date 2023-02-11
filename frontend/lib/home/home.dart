@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:unscript_app/home/service/home_service.dart';
 import 'package:unscript_app/utils/unscript_theme.dart';
 
 class Home extends StatefulWidget {
@@ -10,6 +11,14 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  HomeService service = HomeService();
+
+  @override
+  void initState() {
+    //service.getLiveNews(context: context).then((value) => print(value));
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;

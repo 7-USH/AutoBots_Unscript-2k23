@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:unscript_app/home/home.dart';
 import 'package:unscript_app/news/news.dart';
 import 'package:unscript_app/portfolio/portfolio.dart';
 import 'package:unscript_app/utils/unscript_theme.dart';

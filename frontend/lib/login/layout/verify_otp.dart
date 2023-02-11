@@ -1,5 +1,10 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:unscript_app/login/layout/set_pass_screen.dart';
+import 'package:unscript_app/login/models/reset_pass_model.dart';
+import 'package:unscript_app/login/models/session_model.dart';
 import 'package:unscript_app/login/service/login_service.dart';
 import 'package:unscript_app/utils/unscript_theme.dart';
 
@@ -99,15 +104,43 @@ class _VerifyOTPPageState extends State<VerifyOTPPage> {
                   child: ElevatedButton(
                     onPressed: () {
                       FocusScope.of(context).unfocus();
-
                       String activationCode = _controller1.text +
                           _controller2.text +
                           _controller3.text +
                           _controller4.text;
-
                       if (activationCode.length == 4) {
                         setState(() {
                           _isLoading = true;
+                        });
+                        service
+                            .validateOTP(
+                                model: ResetPassModel(
+                                  email: widget.email,
+                                  resetCode: int.parse(activationCode),
+                                ),
+                                context: context)
+                            .then((value) {
+                          if (value is SessionModel) {
+                            setState(() {
+                              _isLoading = false;
+                            });
+                            _controller1.clear();
+                            _controller2.clear();
+                            _controller3.clear();
+                            _controller4.clear();
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (_) {
+                              return const SetPassScreen();
+                            }));
+                          } else {
+                            setState(() {
+                              _isLoading = false;
+                            });
+                            _controller1.clear();
+                            _controller2.clear();
+                            _controller3.clear();
+                            _controller4.clear();
+                          }
                         });
                       }
                     },
