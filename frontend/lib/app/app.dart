@@ -75,7 +75,7 @@ class _AppState extends State<App> {
                 top: BorderSide(
                     width: 0.2,
                     color: UnScriptTheme.bgTextColor2.withOpacity(0.6)))),
-        screens: [Home(), NewsPage(), const Scaffold(), const Scaffold()],
+        screens: [Home(), NewsPage(), const Scaffold(), Portfolio()],
         screenTransitionAnimation: const ScreenTransitionAnimation(
           animateTabTransition: true,
           curve: Curves.easeIn,
