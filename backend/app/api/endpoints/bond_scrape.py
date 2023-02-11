@@ -17,7 +17,12 @@ def get_live_bonds(
     db: Session = Depends(deps.get_db),
 ) -> List:
     live_bonds = scraper.get_current_bonds()
-    return live_bonds
+    if live_bonds:
+        return live_bonds[1:]
+    raise HTTPException(
+        status_code=503,
+        detail="Internal Server Error"
+    )
 
 
 @router.get("/news")
@@ -26,7 +31,12 @@ def get_live_bonds(
     db: Session = Depends(deps.get_db),
 ) -> List:
     news = scraper.get_news()
-    return news
+    if news:
+        return news
+    raise HTTPException(
+        status_code=503,
+        detail="Internal Server Error"
+    )
 
 @router.post("/ask-question")
 def get_reply(*,

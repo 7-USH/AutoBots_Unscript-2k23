@@ -7,6 +7,8 @@ class Settings:
 
     SENDER_EMAIL = os.environ.get("SENDER_EMAIL", "soumitrakand3@gmail.com")
     EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD", "ciekkwjqjmxuclcb")
+    X_API_KEY = os.environ.get(
+        "X_API_KEY", "lSVB74GZppMJ35d0r6Enp1e85X8s0bTxc2jqJYhf17WONaJn2ufSFMxRNi1Y")
 
 
 settings = Settings()

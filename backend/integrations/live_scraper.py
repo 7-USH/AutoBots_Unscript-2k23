@@ -10,6 +10,7 @@ class Scraper:
 
         except Exception as e:
             print(e)
+            return False
 
         soup = BeautifulSoup(r.content, 'html.parser')
         result = soup.find(id='datadiv_1')
@@ -37,8 +38,14 @@ class Scraper:
         return li
 
     def get_news(self):
-        html = requests.get(
-            'https://economictimes.indiatimes.com/topic/bond-market')
+        try:
+            html = requests.get(
+                'https://economictimes.indiatimes.com/topic/bond-market')
+
+        except Exception as e:
+            print(e)
+            return False
+
         soup = BeautifulSoup(html.text, "html5lib")
 
         span_list = soup.find(id='categorywiseTop').find_all("span")
