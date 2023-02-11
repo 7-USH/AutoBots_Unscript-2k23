@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:unscript_app/utils/error_page.dart';
@@ -17,6 +19,11 @@ class UnScriptTheme {
 
   // ignore: constant_identifier_names
   static const String API_VERSION = "api/v1/";
+
+
+  // bond api key
+  static const String BOND_API_KEY =
+      "cfjist1r01que34o13n0cfjist1r01que34o13ng";
 
   static TextStyle appText({
     required double size,
@@ -114,7 +121,7 @@ class UnScriptTheme {
     );
   }
 
-   static moveToError(
+  static moveToError(
       {required BuildContext context,
       required String text,
       required int statusCode}) {
