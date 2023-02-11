@@ -9,9 +9,11 @@ from backports.zoneinfo import ZoneInfo
 
 class Bonds(Base):
     id = Column(String(36), primary_key=True, default=default_pk)
+    last_price = Column(Float, nullable=False)
     bond_price = Column(Float, nullable=False)
     up_val = Column(Float)
     down_val = Column(Float)
-    gain = Column(Float)
+    change = Column(Float)
+    volume = Column(Float)
     face_value = Column(Float)
     available = Column(Boolean)

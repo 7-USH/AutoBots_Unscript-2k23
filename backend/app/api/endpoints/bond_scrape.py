@@ -24,6 +24,33 @@ def get_live_bonds(
         detail="Internal Server Error"
     )
 
+@router.post("/update-database-bonds")
+def update_database_bonds(
+    *,
+    db: Session = Depends(deps.get_db),
+) -> Dict:
+    bonds = get_live_bonds()
+    success = 0
+    for bond in bonds:
+        try:
+            success = crud.bonds.create(
+                last_price = bond['last_price'],
+                bond_price = bond['open'],
+                up_val = bond['high'],
+                down_val = bond['low'],
+                change = bond['change'],
+                volume = bond['volume'],
+                face_value = bond['face_value'],
+                available = True
+            )
+        except:
+            raise HTTPException(
+                status_code=503,
+                detail="Internal Serveer Error"
+            )
+    return success
+    
+
 
 @router.get("/news")
 def get_live_bonds(
