@@ -48,6 +48,8 @@ dependencies:
   either_dart: ^0.3.0
   animated_snack_bar: ^0.3.0
   firebase_core: ^2.5.0
+  firebase_messaging: ^14.2.1
+
 
 dev_dependencies:
   flutter_test:
