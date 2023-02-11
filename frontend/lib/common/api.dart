@@ -18,6 +18,7 @@ class ApiService {
   Future<Either<MyError, Map<String, dynamic>>> getData(String endpoint) async {
     Uri uri = getUri(endpoint);
     var response = await http.get(uri, headers: await getHeaders());
+    print(response.body);
     if (response.statusCode == 200) {
       return Right(jsonDecode(response.body.toString()));
     }

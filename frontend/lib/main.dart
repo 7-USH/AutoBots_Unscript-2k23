@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:unscript_app/app/app.dart';
+import 'package:unscript_app/login/layout/set_pass_screen.dart';
+import 'package:unscript_app/login/layout/succes_pass_screen.dart';
 import 'package:unscript_app/login/login.dart';
 import 'package:unscript_app/register/layout/verify_otp_screen.dart';
 
