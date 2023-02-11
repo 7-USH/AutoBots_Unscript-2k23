@@ -7,6 +7,8 @@ import 'package:unscript_app/news/service/news_service.dart';
 import 'package:unscript_app/news/ui_view/news_card.dart';
 import 'package:unscript_app/utils/unscript_theme.dart';
 
+import 'models/news_model.dart';
+
 class NewsPage extends StatefulWidget {
   const NewsPage({Key? key}) : super(key: key);
 
@@ -15,11 +17,25 @@ class NewsPage extends StatefulWidget {
 }
 
 class _NewsPageState extends State<NewsPage> {
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   // initializeItems();
+  // }
+
+  // String searchString = "";
+  // var items;
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     final TextEditingController _controller = TextEditingController();
     NewsService service = NewsService();
+
+    // Future<void> initializeItems() async {
+    //   items = await service.getLiveNews(context: context);
+    // }
 
     return Scaffold(
       backgroundColor: UnScriptTheme.backgroundColor,
@@ -50,12 +66,26 @@ class _NewsPageState extends State<NewsPage> {
                 controller: _controller,
                 padding: const EdgeInsets.all(10.0),
                 placeholder: 'search',
-                onChanged: (value) {},
+                onChanged: (value) {
+                  // setState(() {
+                  //   searchString = value.toLowerCase();
+                  //   print(searchString);
+                  // });
+                },
+                onTap: () {
+                  // searchString = _controller.text;
+                  // searchString = '';
+                },
                 placeholderStyle: UnScriptTheme.appText(
                     size: screenWidth / 23,
                     weight: FontWeight.w500,
                     color: UnScriptTheme.bgTextColor2),
-                onSubmitted: (value) {},
+                onSubmitted: (value) {
+                  // for (var item in items) {
+                  //   if(item.toString().toLowerCase().contains(other))
+                  // }
+                  // print(value);
+                },
                 autocorrect: true,
                 backgroundColor: Colors.white,
               ),

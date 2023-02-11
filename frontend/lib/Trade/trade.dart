@@ -10,6 +10,7 @@ class TradeScreen extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: UnScriptTheme.backgroundColor,
+      // appBar: AppBar(title: Text('Trade')),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -24,7 +25,7 @@ class TradeScreen extends StatelessWidget {
                   borderRadius: BorderRadius.all(
                     Radius.circular(20.0),
                   ),
-                  color: UnScriptTheme.bgTextColor2,
+                  color: UnScriptTheme.bgTextColor2.withOpacity(0.1),
                 ),
                 height: (index % 4 + 1) * 100,
                 child: Center(
@@ -33,7 +34,6 @@ class TradeScreen extends StatelessWidget {
                     style: UnScriptTheme.screenText(
                       size: screenWidth / 16,
                       weight: FontWeight.w100,
-                      color: Colors.black,
                     ),
                   ),
                 ),
