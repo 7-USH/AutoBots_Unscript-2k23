@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, unused_import
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -7,8 +8,9 @@ import 'package:unscript_app/app/app.dart';
 import 'package:unscript_app/login/login.dart';
 import 'package:unscript_app/register/layout/verify_otp_screen.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   const orientations = [
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown
@@ -56,4 +58,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-  

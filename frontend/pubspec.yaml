@@ -47,6 +47,7 @@ dependencies:
   loading_animation_widget: ^1.2.0+4
   either_dart: ^0.3.0
   animated_snack_bar: ^0.3.0
+  firebase_core: ^2.5.0
 
 dev_dependencies:
   flutter_test:
