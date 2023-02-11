@@ -52,8 +52,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: "UnScript Hackathon",
       debugShowCheckedModeBanner: false,
-      home: App(),
+      home: home,
     );
   }
 }
-  
