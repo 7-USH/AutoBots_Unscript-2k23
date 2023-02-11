@@ -46,6 +46,7 @@ def get_reply(*,
 ) -> Dict:
     openai.api_key = "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"
     question = question.get('question')
+    print(question)
     response = openai.Completion.create(
         model="text-davinci-003",
         prompt=question,
