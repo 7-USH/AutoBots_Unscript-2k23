@@ -92,6 +92,8 @@ class CRUDUser(CRUDBase):
         # minutes = divmod(
         #     (datetime.now(tz=ZoneInfo('Asia/Kolkata')) - user_obj.registration_date).total_seconds(), 60)[0]
         success = user_obj.activation_code == activation_code
+        print(activation_code)
+        print(user_obj.activation_code)
         if success:
             setattr(user_obj, 'is_active', True)
             db.add(user_obj)
