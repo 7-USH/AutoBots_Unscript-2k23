@@ -40,6 +40,7 @@ def update_database_bonds(
         print(type(bond['change']))
         success = crud.bonds.create(
             db=db,
+            company_name=bond['company_name'],
             last_price=bond['last_price'],
             bond_price=bond['open'],
             up_val=bond['high'],
