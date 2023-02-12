@@ -28,6 +28,7 @@ class CRUDBondRequests(CRUDBase):
 
         fc_messaging.send_notif(deviceToken=user_bond_obj.user.device_token,
                                 buyer_name=buyer_obj.full_name, company_name=user_bond_obj.bond.company_name)
+        fc_messaging.send_email_bond_status(buyer_obj.full_name,user_bond_obj.bond.company_name,user_bond_obj.user.email)
         return bond_request_obj
 
     def get_requests_by_user(self, db: Session, user_email: str):
