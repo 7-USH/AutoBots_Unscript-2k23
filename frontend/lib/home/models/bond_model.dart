@@ -1,12 +1,12 @@
 class BondModel {
   String? companyName;
-  String? lastPrice;
+  double? lastPrice;
   String? change;
-  String? open;
-  String? high;
-  String? low;
-  String? volume;
-  String? faceValue;
+  double? open;
+  double? high;
+  double? low;
+  double? volume;
+  double? faceValue;
 
   BondModel(
       {this.companyName,

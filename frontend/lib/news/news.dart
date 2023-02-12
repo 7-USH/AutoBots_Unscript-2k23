@@ -37,9 +37,9 @@ class _NewsPageState extends State<NewsPage> {
                 ),
               ),
               Text(
-                "Get trending news about Trading!",
+                "Get trending news about trading!",
                 style: UnScriptTheme.appText(
-                    size: screenWidth / 21,
+                    size: screenWidth / 20,
                     weight: FontWeight.bold,
                     color: UnScriptTheme.bgTextColor2.withOpacity(0.6)),
               ),
@@ -50,6 +50,7 @@ class _NewsPageState extends State<NewsPage> {
                 controller: _controller,
                 padding: const EdgeInsets.all(10.0),
                 placeholder: 'search',
+                enabled: false,
                 onChanged: (value) {},
                 placeholderStyle: UnScriptTheme.appText(
                     size: screenWidth / 23,
@@ -103,7 +104,7 @@ class _NewsPageState extends State<NewsPage> {
                                 height: 20,
                               );
                             },
-                            itemCount: snapshot.data!.length),
+                            itemCount: 5),
                       );
                     }
                   })

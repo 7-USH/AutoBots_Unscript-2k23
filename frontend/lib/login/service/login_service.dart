@@ -4,9 +4,11 @@ import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:unscript_app/common/api.dart';
+import 'package:unscript_app/home/models/profile_details_model.dart';
 import 'package:unscript_app/login/models/login_model.dart';
 import 'package:unscript_app/login/models/reset_pass_model.dart';
 import 'package:unscript_app/login/models/session_model.dart';
+import 'package:unscript_app/utils/unscript_theme.dart';
 
 class LoginService {
   final ApiService _service = ApiService();
@@ -72,6 +74,20 @@ class LoginService {
       ).show(context);
     } else {
       return response;
+    }
+  }
+
+  Future<ProfileDetailsModel> getMyDetails(
+      {required BuildContext context}) async {
+    String endpoint = "user/get-user-details";
+    var response = await _service.getData(endpoint);
+    if (response.isLeft) {
+      return UnScriptTheme.moveToError(
+          context: context,
+          text: response.left.message!,
+          statusCode: response.left.statusCode);
+    } else {
+      return ProfileDetailsModel.fromJson(response.right);
     }
   }
 }

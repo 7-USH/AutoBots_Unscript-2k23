@@ -25,7 +25,7 @@ class NewsCard extends StatelessWidget {
             child: Text(
               model.title!,
               style: UnScriptTheme.screenText(
-                size: screenWidth / 20,
+                size: screenWidth / 21.5,
                 weight: FontWeight.bold,
               ),
             ),

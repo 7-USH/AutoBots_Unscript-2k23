@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, unused_import, unused_local_variable, avoid_print
+// ignore_for_file: prefer_const_constructors, unused_import, unused_local_variable, avoid_print, unused_element
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +8,7 @@ import 'package:unscript_app/app/app.dart';
 import 'package:unscript_app/login/layout/set_pass_screen.dart';
 import 'package:unscript_app/login/layout/succes_pass_screen.dart';
 import 'package:unscript_app/login/login.dart';
+import 'package:unscript_app/register/layout/scan_adhar_screen.dart';
 import 'package:unscript_app/register/layout/verify_otp_screen.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
@@ -18,15 +19,15 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
-  // await FirebaseMessaging.instance.getToken();
-  // FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
-  // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-  //   if (message.notification != null) {
-  //     print('Message also contained a notification: ${message.notification}');
-  //   }
-  // });
+  await Firebase.initializeApp();
+  await FirebaseMessaging.instance.getToken();
+  FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    if (message.notification != null) {
+      print('Message also contained a notification: ${message.notification}');
+    }
+  });
   const orientations = [
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown
@@ -47,12 +48,16 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    // FirebaseMessaging.instance.getToken().then((newToken) {
-    //   print("FCM Token: ");
-    //   print(newToken);
-    // });
+    FirebaseMessaging.instance.getToken().then((newToken) {
+      saveToken(newToken!);
+    });
     switchHome();
     super.initState();
+  }
+
+  void saveToken(String token) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    await sharedPreferences.setString("device_token", token);
   }
 
   void switchHome() async {

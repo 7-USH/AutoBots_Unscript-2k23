@@ -94,7 +94,7 @@ class BondCard extends StatelessWidget {
                             size: screenWidth / 22,
                           ),
                           Text(
-                            model.high!,
+                            model.high!.toString(),
                             overflow: TextOverflow.ellipsis,
                             style: UnScriptTheme.screenText(
                                 size: screenWidth / 28,
@@ -114,7 +114,7 @@ class BondCard extends StatelessWidget {
                             size: screenWidth / 22,
                           ),
                           Text(
-                            model.low!,
+                            model.low!.toString(),
                             overflow: TextOverflow.ellipsis,
                             style: UnScriptTheme.screenText(
                                 size: screenWidth / 28,
@@ -144,7 +144,7 @@ class BondCard extends StatelessWidget {
                             color: UnScriptTheme.backgroundColor),
                       ),
                       Text(
-                        model.faceValue!,
+                        model.faceValue!.toString(),
                         overflow: TextOverflow.ellipsis,
                         style: UnScriptTheme.screenText(
                             size: screenWidth / 22,

@@ -14,8 +14,9 @@ class UnScriptTheme {
   static const Color bgTextColor2 = Color(0xffAEAEAE);
 
   // ignore: constant_identifier_names
-  static const String UNSCRIPT_DB_LINK = 
-  "https://fcreh-autobots.onrender.com/";
+  static const String UNSCRIPT_DB_LINK =
+      "http://ec2-100-26-209-28.compute-1.amazonaws.com:8000/";
+  //"https://fcreh-autobots.onrender.com/";
   //"https://frce-fastapi-soumitrakand7.cloud.okteto.net/";
 
   // ignore: constant_identifier_names
