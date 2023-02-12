@@ -4,8 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+<<<<<<< HEAD
 import 'package:unscript_app/chat/chat.dart';
 import 'package:unscript_app/chat/models/message_model.dart';
+=======
+import 'package:unscript_app/Trade/trade.dart';
+>>>>>>> 1857365ad04302ded1995d9b17c4a803e0ed95a8
 import 'package:unscript_app/home/home.dart';
 import 'package:unscript_app/home/models/profile_details_model.dart';
 import 'package:unscript_app/login/service/login_service.dart';
@@ -148,6 +152,7 @@ class _AppState extends State<App> {
                 top: BorderSide(
                     width: 0.2,
                     color: UnScriptTheme.bgTextColor2.withOpacity(0.6)))),
+<<<<<<< HEAD
         screens: [
           Home(
             model: profileDetailsModel,
@@ -157,6 +162,12 @@ class _AppState extends State<App> {
           ChatPage(),
           Portfolio(model: profileDetailsModel,)
         ],
+=======
+
+
+        screens: [Home(), NewsPage(), TradeScreen(), Portfolio()],
+
+>>>>>>> 1857365ad04302ded1995d9b17c4a803e0ed95a8
         screenTransitionAnimation: const ScreenTransitionAnimation(
           animateTabTransition: true,
           curve: Curves.easeIn,

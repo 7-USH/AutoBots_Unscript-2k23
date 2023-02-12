@@ -254,6 +254,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.1"
+<<<<<<< HEAD
   flutter_parsed_text:
     dependency: transitive
     description:
@@ -278,6 +279,8 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.1.0"
+=======
+>>>>>>> 1857365ad04302ded1995d9b17c4a803e0ed95a8
   flutter_staggered_grid_view:
     dependency: "direct main"
     description:
@@ -806,5 +809,5 @@ packages:
     source: hosted
     version: "0.2.0+3"
 sdks:
-  dart: ">=2.19.0-444.2.beta <4.0.0"
+  dart: ">=2.19.0-444.2.beta <3.0.0"
   flutter: ">=3.3.0"
