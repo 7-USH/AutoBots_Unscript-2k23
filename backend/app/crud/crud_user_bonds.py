@@ -3,6 +3,7 @@ from typing import Dict
 from sqlalchemy.orm import Session
 from .base import CRUDBase
 from app.models import Bonds, UserBonds, Users
+from app import crud
 
 
 class CRUDUserBonds(CRUDBase):
@@ -29,12 +30,17 @@ class CRUDUserBonds(CRUDBase):
 
             return user_bond_obj
 
-        return False
-
     def get_user_bonds(self, db: Session, user_email: str):
         user_bonds = db.query(UserBonds).filter(
             UserBonds.user_email == user_email).all()
-        return user_bonds
+        bonds_list = []
+        for bond in user_bonds:
+            bond_dict = bond.__dict__
+            bond_details = crud.bonds.get_bond_by_id(
+                db=db, bond_id=bond.bond_id)
+            bond_dict['bond_details'] = bond_details
+            bonds_list.append(bond_dict)
+        return bonds_list
 
 
 user_bonds = CRUDUserBonds()

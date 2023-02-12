@@ -43,5 +43,9 @@ class CRUDBondsCreateRequest(CRUDBase):
     def get(self, db: Session):
         return db.query(Bonds).filter(Bonds.available == True).all()
 
+    def get_bond_by_id(self, db: Session, bond_id: str):
+        bond_obj = db.query(Bonds).filter(Bonds.id == bond_id).first()
+        return bond_obj
+
 
 bonds = CRUDBondsCreateRequest()

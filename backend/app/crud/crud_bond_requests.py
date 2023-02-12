@@ -59,4 +59,4 @@ class CRUDBondRequests(CRUDBase):
         return owner_obj
 
 
-bond_requests = CRUDBondRequests
+bond_requests = CRUDBondRequests()
