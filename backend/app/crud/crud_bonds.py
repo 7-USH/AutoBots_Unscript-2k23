@@ -1,10 +1,10 @@
 from sqlalchemy.orm import Session
 from .base import CRUDBase
-from ..models.bonds import Bonds
-from datetime import datetime, timedelta
+from ..models import Bonds, UserBonds
 import jinja2
 from integrations import mailer
 from backports.zoneinfo import ZoneInfo
+from app import crud
 
 
 class CRUDBondsCreateRequest(CRUDBase):
@@ -46,6 +46,11 @@ class CRUDBondsCreateRequest(CRUDBase):
     def get_bond_by_id(self, db: Session, bond_id: str):
         bond_obj = db.query(Bonds).filter(Bonds.id == bond_id).first()
         return bond_obj
+
+    def is_bond_owned(self, db: Session, bond_id: str):
+        user_bond_obj = db.query(UserBonds).filter(
+            UserBonds.bond_id == bond_id).first()
+        return user_bond_obj
 
 
 bonds = CRUDBondsCreateRequest()

@@ -16,6 +16,10 @@ def create_user_bond(
     current_user: models.Users = Depends(deps.get_current_user)
 ) -> Any:
     user_obj = crud.user.get_by_email(db=db, email=current_user)
+    if crud.bonds.is_bond_owned(db=db, bond_id=user_bond_dict.get('bond_id')):
+        response = crud.bond_requests.create(db=db, bond_id=user_bond_dict.get(
+            'bond_id'), buyer_email=current_user, requested_price=user_bond_dict.get('requested_price'))
+        return response
     response = crud.user_bonds.create(
         db=db, user_obj=user_obj, bond_dict=user_bond_dict)
     return response
@@ -38,16 +42,6 @@ def send_user_bond(
     current_user: models.Users = Depends(deps.get_current_user),
     user_bond_dict: Dict
 ):
-    user_bond_obj = crud.user_bonds.change_bond_status(
-        db=db, status="Up for selling", user_bond_id=user_bond_dict.get("user_bond_id"), user_email=current_user)
+    user_bond_obj = crud.user_bonds.sell_user_bond(
+        db=db, user_bond_id=user_bond_dict.get('user_bond_id'), user_email=current_user)
     return user_bond_obj
-
-
-@router.get("/get-bonds-for-sale")
-def get_bonds_for_sale(
-    *,
-    db: Session = Depends(deps.get_db),
-    current_user: models.Users = Depends(deps.get_current_user),
-):
-    user_bonds = crud.user_bonds.get_bonds_for_sale(db=db)
-    return user_bonds

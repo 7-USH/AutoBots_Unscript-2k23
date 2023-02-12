@@ -43,13 +43,17 @@ class CRUDUserBonds(CRUDBase):
             bonds_list.append(bond_dict)
         return bonds_list
 
-    def change_bond_status(self, db: Session, user_email: str, user_bond_id: str, status: str):
+    def sell_user_bond(self, db: Session, user_email: str, user_bond_id: str):
         user_bond_obj = db.query(UserBonds).filter(
             UserBonds.user_email == user_email).filter(UserBonds.id == user_bond_id).first()
-        setattr(user_bond_obj, 'selling_status', status)
+        setattr(user_bond_obj, 'selling_status', 'Up for sale')
         db.add(user_bond_obj)
+
+        setattr(user_bond_obj.bond, 'available', True)
+        db.add(user_bond_obj.bond)
         db.commit()
         db.refresh(user_bond_obj)
+
         return user_bond_obj
 
     def get_bonds_for_sale(self, db: Session):

@@ -8,23 +8,6 @@ from .. import deps
 router = APIRouter()
 
 
-
-@router.post("/create-request")
-def create_request(
-    *,
-    db: Session = Depends(deps.get_db),
-    user_bond_dict: Dict,
-    current_user: models.Users = Depends(deps.get_current_user),
-):
-    request_obj = crud.bond_requests.create(
-        db=db,
-        bond_id=user_bond_dict.get('bond_id'),
-        buyer_email=current_user,
-        requested_price=user_bond_dict.get('requested_price')
-    )
-    return request_obj
-
-
 @router.get("/get-requests-by-owner")
 def get_requests_by_owner(
     *,
@@ -36,7 +19,7 @@ def get_requests_by_owner(
     return user_bond_requests
 
 
-@router.post("approve-request")
+@router.post("/approve-request")
 def approve_request(
     *,
     db: Session = Depends(deps.get_db),

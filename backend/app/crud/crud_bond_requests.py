@@ -62,6 +62,11 @@ class CRUDBondRequests(CRUDBase):
             bond_id=bond_id
         )
         db.add(buyer_bond_obj)
+
+        bond_obj = crud.bonds.get_bond_by_id(db=db, bond_id=bond_id)
+        setattr(bond_obj, 'available', True)
+
+        db.add(bond_obj)
         db.commit()
 
         db.refresh(owner_obj)
