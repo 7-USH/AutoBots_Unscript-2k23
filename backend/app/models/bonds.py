@@ -13,7 +13,7 @@ class Bonds(Base):
     bond_price = Column(Float, nullable=False)
     up_val = Column(Float)
     down_val = Column(Float)
-    change = Column(Float)
+    change = Column(String(24))
     volume = Column(Float)
     face_value = Column(Float)
     available = Column(Boolean)

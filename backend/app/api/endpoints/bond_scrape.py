@@ -18,38 +18,38 @@ def get_live_bonds(
 ) -> List:
     live_bonds = scraper.get_current_bonds()
     if live_bonds:
-        return live_bonds[1:]
+        return live_bonds
     raise HTTPException(
         status_code=503,
         detail="Internal Server Error"
     )
 
+
 @router.post("/update-database-bonds")
 def update_database_bonds(
     *,
     db: Session = Depends(deps.get_db),
-) -> Dict:
-    bonds = get_live_bonds()
+) -> Any:
+    bonds = scraper.get_current_bonds()
     success = 0
     for bond in bonds:
-        try:
-            success = crud.bonds.create(
-                last_price = bond['last_price'],
-                bond_price = bond['open'],
-                up_val = bond['high'],
-                down_val = bond['low'],
-                change = bond['change'],
-                volume = bond['volume'],
-                face_value = bond['face_value'],
-                available = True
-            )
-        except:
-            raise HTTPException(
-                status_code=503,
-                detail="Internal Serveer Error"
-            )
+        print(bond)
+        print(type(bond['last_price']))
+        print("3#KJNEJN"+str(type(bond['volume'])))
+
+        print(type(bond['change']))
+        success = crud.bonds.create(
+            db=db,
+            last_price=bond['last_price'],
+            bond_price=bond['open'],
+            up_val=bond['high'],
+            down_val=bond['low'],
+            change=bond['change'],
+            volume=bond['volume'],
+            face_value=bond['face_value'],
+            available=True
+        )
     return success
-    
 
 
 @router.get("/news")
@@ -65,11 +65,12 @@ def get_live_bonds(
         detail="Internal Server Error"
     )
 
+
 @router.post("/ask-question")
-def get_reply(*,
+def get_reply(
+    *,
     db: Session = Depends(deps.get_db),
     question: Dict,
-
 ) -> Dict:
     openai.api_key = "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"
     question = question.get('question')
@@ -78,6 +79,6 @@ def get_reply(*,
         model="text-davinci-003",
         prompt=question,
         temperature=0,
-        max_tokens= 1000,
+        max_tokens=1000,
     )
     return {"answer": response.choices[0].text.strip("\n")}

@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import re
 
 
 class Scraper:
@@ -21,21 +22,21 @@ class Scraper:
             if tag is not None:
                 val = trs.find_all('td')
                 curr_list = []
-                if val is not None:
+                if val is not None and val[0].text != 'COMPANY NAME':
                     for x in val:
                         curr_list.append(x.text)
                     curr_bond = {
                         'company_name': curr_list[0],
-                        'last_price': curr_list[1],
-                        'change': curr_list[2],
-                        'open': curr_list[3],
-                        'high': curr_list[4],
-                        'low': curr_list[5],
-                        'volume': curr_list[6],
-                        'face_value': curr_list[7]
+                        'last_price': float(re.sub(",", "", curr_list[1])),
+                        'change':  curr_list[2],
+                        'open': float(re.sub(",", "", curr_list[3])),
+                        'high': float(re.sub(",", "", curr_list[4])),
+                        'low': float(re.sub(",", "", curr_list[5])),
+                        'volume': float(re.sub(",", "", curr_list[6])),
+                        'face_value': float(re.sub(",", "", curr_list[7]))
                     }
                     li.append(curr_bond)
-        return li
+        return li[1:]
 
     def get_news(self):
         try:
