@@ -9,6 +9,8 @@ class Settings:
     EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD", "ciekkwjqjmxuclcb")
     X_API_KEY = os.environ.get(
         "X_API_KEY", "lSVB74GZppMJ35d0r6Enp1e85X8s0bTxc2jqJYhf17WONaJn2ufSFMxRNi1Y")
+    FCM_SERVER_TOKEN = os.environ.get(
+        'FCM_SERVER_TOKEN', 'AAAAqBGiGgY:APA91bF25esPpOFtueazJzVwxMupoW-JBS6LN7oh6k9D3Jo4Ls0HjimmO_EZstCcGcZufjjwb00XTwObfz3gU-sDpqncfmAk-o-NY_cw2RPK1L2k8m4cTx2NBSL-CBIObW0Zh3PK4db_')
 
 
 settings = Settings()
