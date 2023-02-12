@@ -15,15 +15,12 @@ class UnScriptTheme {
 
   // ignore: constant_identifier_names
   static const String UNSCRIPT_DB_LINK =
-      "https://frce-fastapi-soumitrakand7.cloud.okteto.net/";
+      "http://ec2-100-26-209-28.compute-1.amazonaws.com:8000/";
+  //"https://fcreh-autobots.onrender.com/";
+  //"https://frce-fastapi-soumitrakand7.cloud.okteto.net/";
 
   // ignore: constant_identifier_names
   static const String API_VERSION = "api/v1/";
-
-
-  // bond api key
-  static const String BOND_API_KEY =
-      "cfjist1r01que34o13n0cfjist1r01que34o13ng";
 
   static TextStyle appText({
     required double size,

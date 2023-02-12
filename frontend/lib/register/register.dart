@@ -1,9 +1,7 @@
 // ignore_for_file: unused_field
 
 import 'package:flutter/material.dart';
-import 'package:unscript_app/register/layout/verify_otp_screen.dart';
-import 'package:unscript_app/register/models/register_model.dart';
-import 'package:unscript_app/register/service/register_service.dart';
+import 'package:unscript_app/register/layout/scan_adhar_screen.dart';
 import 'package:unscript_app/utils/unscript_theme.dart';
 
 class Register extends StatefulWidget {
@@ -14,12 +12,10 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  final emailController = TextEditingController();
-  final nameController = TextEditingController();
-  final passwordController = TextEditingController();
+  final emailController = TextEditingController(text: "tush1245@gmail.com");
+  final nameController = TextEditingController(text: "Tushar");
+  final passwordController = TextEditingController(text: "11tusmli89");
   final _formKey = GlobalKey<FormState>();
-  RegisterService service = RegisterService();
-  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -145,7 +141,7 @@ class _RegisterState extends State<Register> {
                         return "Please enter email";
                       } else if (!RegExp(
                               r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
-                          .hasMatch(value)) {
+                          .hasMatch(value.trim())) {
                         return "Email is not valid";
                       }
                       return null;
@@ -183,53 +179,21 @@ class _RegisterState extends State<Register> {
                     child: ElevatedButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            setState(() {
-                              _isLoading = true;
-                            });
-                            service
-                                .registerUser(
-                                    context: context,
-                                    model: RegisterModel(
-                                        fullName: nameController.text,
-                                        email: emailController.text,
-                                        password: passwordController.text))
-                                .onError((error, stackTrace) {
-                              setState(() {
-                                _isLoading = false;
-                              });
-                            }).then((value) {
-                              setState(() {
-                                _isLoading = false;
-                              });
-                              if (value is RegisterModel) {
-                                Navigator.pushReplacement(context,
-                                    MaterialPageRoute(builder: (_) {
-                                  return VerifyOtpScreen(
-                                      email: emailController.text);
-                                }));
-                              }
-                            });
+                            Navigator.pushReplacement(context,
+                                MaterialPageRoute(builder: (_) {
+                              return ScanAdharScreen(
+                                  email: emailController.text.trim(),
+                                  password: passwordController.text.trim());
+                            }));
                           }
                         },
                         style: UnScriptTheme.buttonStyle(
                             backColor: UnScriptTheme.nearlyBlue),
-                        child: _isLoading
-                            ? Center(
-                                child: SizedBox(
-                                  height: screenWidth / 20,
-                                  width: screenWidth / 20,
-                                  child: const CircularProgressIndicator(
-                                    color: UnScriptTheme.perfectWhite,
-                                    strokeWidth: 3,
-                                  ),
-                                ),
-                              )
-                            : Text(
-                                "Create an Account",
-                                style: UnScriptTheme.screenText(
-                                    size: screenWidth / 21,
-                                    weight: FontWeight.bold),
-                              )),
+                        child: Text(
+                          "Create an Account",
+                          style: UnScriptTheme.screenText(
+                              size: screenWidth / 21, weight: FontWeight.bold),
+                        )),
                   )
                 ],
               ),
