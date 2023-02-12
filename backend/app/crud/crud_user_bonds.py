@@ -46,7 +46,7 @@ class CRUDUserBonds(CRUDBase):
     def sell_user_bond(self, db: Session, user_email: str, user_bond_id: str):
         user_bond_obj = db.query(UserBonds).filter(
             UserBonds.user_email == user_email).filter(UserBonds.id == user_bond_id).first()
-        setattr(user_bond_obj, 'selling_status', 'Up for sale')
+        setattr(user_bond_obj, 'selling_status', 'Public')
         db.add(user_bond_obj)
 
         setattr(user_bond_obj.bond, 'available', True)
