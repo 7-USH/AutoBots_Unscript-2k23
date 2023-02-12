@@ -29,3 +29,25 @@ def get_user_bonds(
 ):
     user_bonds = crud.user_bonds.get_user_bonds(db=db, user_email=current_user)
     return user_bonds
+
+
+@router.put("/sell-user-bond")
+def send_user_bond(
+    *,
+    db: Session = Depends(deps.get_db),
+    current_user: models.Users = Depends(deps.get_current_user),
+    user_bond_dict: Dict
+):
+    user_bond_obj = crud.user_bonds.change_bond_status(
+        db=db, status="Up for selling", user_bond_id=user_bond_dict.get("user_bond_id"), user_email=current_user)
+    return user_bond_obj
+
+
+@router.get("/get-bonds-for-sale")
+def get_bonds_for_sale(
+    *,
+    db: Session = Depends(deps.get_db),
+    current_user: models.Users = Depends(deps.get_current_user),
+):
+    user_bonds = crud.user_bonds.get_bonds_for_sale(db=db)
+    return user_bonds

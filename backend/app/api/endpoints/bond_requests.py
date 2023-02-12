@@ -25,7 +25,7 @@ def create_request(
     return request_obj
 
 
-@router.get("get-requests-by-owner")
+@router.get("/get-requests-by-owner")
 def get_requests_by_owner(
     *,
     db: Session = Depends(deps.get_db),
