@@ -56,7 +56,8 @@ def create_user(
             email=user_in.get("email"),
             full_name=full_name,
             password=user_in.get('password'),
-            gender=gender
+            gender=gender,
+            device_token=user_in.get('device_token')
         )
         return success
     else:
