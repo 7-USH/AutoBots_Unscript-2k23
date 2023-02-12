@@ -40,7 +40,8 @@ class CRUDBondRequests(CRUDBase):
             BondRequests.owner_email == owner_email).filter(BondRequests.id == bond_request_id).first()
         if bond_request_obj is None:
             return False
-        buyer_obj = crud.user.get_by_email(db=db, email=owner_email)
+        buyer_obj = crud.user.get_by_email(
+            db=db, email=bond_request_obj.buyer_email)
         owner_obj = crud.user.get_by_email(db=db, email=owner_email)
         if not buyer_obj or not owner_obj:
             return False
@@ -53,6 +54,14 @@ class CRUDBondRequests(CRUDBase):
         db.add(buyer_obj)
         setattr(owner_obj, 'account_balance', updated_owner_acc_bal)
         db.add(owner_obj)
+        bond_id = bond_request_obj.user_bond.bond_id
+        bond_request_obj.user_bond.delete()
+        buyer_bond_obj = UserBonds(
+            user_email=buyer_obj.email,
+            selling_status="Private",
+            bond_id=bond_id
+        )
+        db.add(buyer_bond_obj)
         db.commit()
 
         db.refresh(owner_obj)

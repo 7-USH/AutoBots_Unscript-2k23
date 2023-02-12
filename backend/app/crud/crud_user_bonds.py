@@ -13,7 +13,8 @@ class CRUDUserBonds(CRUDBase):
         if bond_obj and bond_obj.available:
             user_bond_obj = UserBonds(
                 user_email=user_obj.email,
-                bond_id=bond_obj.id
+                bond_id=bond_obj.id,
+                selling_status="Private"
             )
             db.add(user_bond_obj)
             db.commit()
@@ -41,6 +42,27 @@ class CRUDUserBonds(CRUDBase):
             bond_dict['bond_details'] = bond_details
             bonds_list.append(bond_dict)
         return bonds_list
+
+    def change_bond_status(self, db: Session, user_email: str, user_bond_id: str, status: str):
+        user_bond_obj = db.query(UserBonds).filter(
+            UserBonds.user_email == user_email).filter(UserBonds.id == user_bond_id).first()
+        setattr(user_bond_obj, 'selling_status', status)
+        db.add(user_bond_obj)
+        db.commit()
+        db.refresh(user_bond_obj)
+        return user_bond_obj
+
+    def get_bonds_for_sale(self, db: Session):
+        user_bonds = db.query(UserBonds).filter(
+            UserBonds.selling_status == "Up for selling").all()
+        user_bonds_list = []
+        for bond in user_bonds:
+            bond_dict = bond.__dict__
+            bond_details = crud.bonds.get_bond_by_id(
+                db=db, bond_id=bond.bond_id)
+            bond_dict['bond_details'] = bond_details
+            user_bonds_list.append(bond_dict)
+        return user_bonds_list
 
 
 user_bonds = CRUDUserBonds()
