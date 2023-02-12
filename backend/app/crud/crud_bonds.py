@@ -38,5 +38,8 @@ class CRUDBondsCreateRequest(CRUDBase):
 
         return True
 
+    def get(self, db: Session):
+        return db.query(Bonds).filter(Bonds.available == True).all()
+
 
 bonds = CRUDBondsCreateRequest()

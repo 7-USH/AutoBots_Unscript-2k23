@@ -52,6 +52,14 @@ def update_database_bonds(
     return success
 
 
+@router.get('/get-bonds')
+def get_bonds(
+    *,
+    db: Session = Depends(deps.get_db),
+):
+    return crud.bonds.get(db=db)
+
+
 @router.get("/news")
 def get_live_bonds(
     *,
