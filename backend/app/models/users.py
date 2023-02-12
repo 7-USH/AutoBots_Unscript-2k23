@@ -20,3 +20,4 @@ class Users(Base):
     dob = Column(DateTime)
     gender = Column(String(24))
     account_balance = Column(Float, default=0)
+    device_token = Column(Text)

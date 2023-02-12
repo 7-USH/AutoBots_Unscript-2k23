@@ -36,7 +36,8 @@ class CRUDUser(CRUDBase):
         address: str,
         dob: str,
         gender: str,
-        aadhaar_no: str
+        aadhaar_no: str,
+        device_token: str
     ) -> Any:
         db_obj = Users(
             email=email,
@@ -46,7 +47,8 @@ class CRUDUser(CRUDBase):
             address=address,
             dob=dob,
             gender=gender,
-            aadhaar_no=aadhaar_no
+            aadhaar_no=aadhaar_no,
+            device_token=device_token
         )
         db.add(db_obj)
         db.commit()
