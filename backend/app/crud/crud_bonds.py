@@ -12,6 +12,7 @@ class CRUDBondsCreateRequest(CRUDBase):
         self,
         db: Session,
         *,
+        company_name: str,
         last_price: float,
         bond_price: float,
         up_val: float,
@@ -23,6 +24,7 @@ class CRUDBondsCreateRequest(CRUDBase):
     ):
         print(type(change))
         bond_obj = Bonds(
+            company_name=company_name,
             last_price=last_price,
             bond_price=bond_price,
             up_val=up_val,
